@@ -5,7 +5,21 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  afterBody: [
+    Component.Comments({
+      provider: "giscus",
+      options: {
+        repo: "OneMind-OS/onemind-codex-live",
+        repoId: "R_kgDORuEX_w",
+        category: "General",
+        categoryId: "DIC_kwDORuEX_84C5EXY",
+        mapping: "pathname",
+        strict: false,
+        reactionsEnabled: true,
+        inputPosition: "bottom",
+      },
+    }),
+  ],
   footer: Component.Footer({
     links: {
       "Get Your Own Vault": "https://github.com/OneMind-OS/onemind-codex-template",
@@ -40,12 +54,15 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({ folderDefaultState: "open" }),
   ],
   right: [
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
     Component.Backlinks(),
+    Component.DesktopOnly(
+      Component.RecentNotes({ title: "Recently Updated", limit: 5, showTags: false }),
+    ),
   ],
 }
 
@@ -64,7 +81,7 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({ folderDefaultState: "open" }),
   ],
   right: [],
 }

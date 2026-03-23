@@ -60,8 +60,8 @@ const config: QuartzConfig = {
       }),
       Plugin.SyntaxHighlighting({
         theme: {
-          light: "github-light",
-          dark: "github-dark",
+          light: "min-light",
+          dark: "tokyo-night",
         },
         keepBackground: false,
       }),
@@ -87,6 +87,7 @@ const config: QuartzConfig = {
       Plugin.Static(),
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
+      Plugin.CNAME(),
       // Comment out CustomOgImages to speed up build time
       Plugin.CustomOgImages(),
     ],

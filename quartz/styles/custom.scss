@@ -508,6 +508,108 @@ a, button, input {
   }
 }
 
+// ─────────────────────────────────────
+// 404 — Signal Lost
+// ─────────────────────────────────────
+
+.not-found-page {
+  text-align: center;
+  padding: 4rem 1rem;
+
+  .not-found-content {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .not-found-code {
+    font-family: var(--titleFont), sans-serif;
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, var(--tac-red), var(--tac-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    border: none !important;
+    margin-bottom: 0.75rem;
+    color: var(--tac-cyan);
+  }
+
+  p {
+    opacity: 0.7;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+  }
+
+  .not-found-home {
+    display: inline-block;
+    padding: 0.6rem 1.8rem;
+    border: 1px solid var(--tac-red);
+    border-radius: 4px;
+    font-family: var(--titleFont), sans-serif;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--tac-red);
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--tac-red);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(230, 57, 70, 0.3);
+    }
+  }
+}
+
+// ─────────────────────────────────────
+// Recent Notes — Right Sidebar
+// ─────────────────────────────────────
+
+.recent-notes {
+  border-top: 1px solid var(--tac-border);
+  padding-top: 0.75rem;
+
+  & > h3 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--tac-cyan);
+    font-weight: 700;
+  }
+
+  .recent-ul {
+    li .section {
+      .meta {
+        font-size: 0.75rem;
+        opacity: 0.5;
+      }
+
+      .desc h3 a {
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// ─────────────────────────────────────
+// Giscus Comments
+// ─────────────────────────────────────
+
+.giscus {
+  margin-top: 2rem;
+  border-top: 1px solid var(--tac-border);
+  padding-top: 1.5rem;
+}
+
 // Content meta
 .content-meta {
   font-family: var(--codeFont);
