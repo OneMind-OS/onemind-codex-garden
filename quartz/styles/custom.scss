@@ -2,7 +2,7 @@
 
 // ═══════════════════════════════════════════════
 // OneMind Codex — TACTICAL COMMAND CENTER v4
-// Red (#E63946) + Black + White + Tactical Green (#00FF41)
+// Red (#E63946) + Black + White
 // Military HUD aesthetic
 // ═══════════════════════════════════════════════
 
@@ -10,9 +10,6 @@
   --tac-red: #E63946;
   --tac-red-dim: #B82D3A;
   --tac-red-glow: #FF4D5A;
-  --tac-green: #00FF41;
-  --tac-green-dim: #00CC33;
-  --tac-green-glow: #33FF66;
   --tac-bg: #050608;
   --tac-surface: #0a0e14;
   --tac-border: #151b24;
@@ -28,8 +25,8 @@
   background-color: #050608;
   background-image:
     radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%),
-    linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 65, 0.025) 1px, transparent 1px);
+    linear-gradient(rgba(230, 57, 70, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(230, 57, 70, 0.025) 1px, transparent 1px);
   background-size: 100% 100%, 48px 48px, 48px 48px;
   background-attachment: fixed, scroll, scroll;
 }
@@ -40,8 +37,8 @@
     0deg,
     transparent,
     transparent 3px,
-    rgba(0, 255, 65, 0.005) 3px,
-    rgba(0, 255, 65, 0.005) 4px
+    rgba(230, 57, 70, 0.005) 3px,
+    rgba(230, 57, 70, 0.005) 4px
   );
 }
 
@@ -80,7 +77,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 1rem;
-  background: linear-gradient(135deg, var(--tac-red), var(--tac-green));
+  background: linear-gradient(135deg, var(--tac-red), var(--tac-white));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -103,7 +100,7 @@ button.desktop-explorer h2 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.8rem;
-  color: var(--tac-green);
+  color: var(--tac-red);
 }
 
 // Explorer tree — better item spacing & interaction
@@ -117,8 +114,8 @@ button.desktop-explorer h2 {
     transition: background-color 0.12s ease, color 0.12s ease, padding-left 0.12s ease;
 
     &:hover {
-      background: rgba(0, 255, 65, 0.06);
-      color: var(--tac-green);
+      background: rgba(230, 57, 70, 0.06);
+      color: var(--tac-red);
       padding-left: 0.65rem;
     }
 
@@ -138,7 +135,7 @@ button.desktop-explorer h2 {
     transition: background-color 0.12s ease;
 
     &:hover {
-      background: rgba(0, 255, 65, 0.04);
+      background: rgba(230, 57, 70, 0.04);
     }
 
     div > a,
@@ -157,7 +154,7 @@ button.desktop-explorer h2 {
 // Folder hover color
 .folder-container div > a:hover,
 .folder-container div > button:hover span {
-  color: var(--tac-green) !important;
+  color: var(--tac-red) !important;
 }
 
 // Folder icon color
@@ -178,8 +175,8 @@ button#search-button {
 
   &:hover,
   &:focus {
-    border-color: var(--tac-green);
-    box-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
+    border-color: var(--tac-red);
+    box-shadow: 0 0 10px rgba(230, 57, 70, 0.15);
   }
 }
 
@@ -188,7 +185,7 @@ button#search-button {
 // ─────────────────────────────────────
 
 .graph > svg .node > circle {
-  stroke: var(--tac-green) !important;
+  stroke: var(--tac-red) !important;
 }
 
 .graph > svg .link {
@@ -231,7 +228,7 @@ article {
   h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--tac-green);
+    color: var(--tac-red);
     margin-top: 2rem;
   }
 
@@ -273,12 +270,12 @@ article {
     font-size: 0.94rem;
 
     th {
-      background: rgba(0, 255, 65, 0.06);
+      background: rgba(230, 57, 70, 0.06);
       font-family: var(--headerFont);
       font-weight: 600;
       font-size: 0.88em;
       letter-spacing: 0.02em;
-      color: var(--tac-green);
+      color: var(--tac-white);
       border-bottom: 2px solid var(--tac-red);
     }
 
@@ -297,7 +294,7 @@ article {
   hr {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--tac-red), var(--tac-green), transparent);
+    background: linear-gradient(90deg, transparent, var(--tac-red), transparent);
     margin: 2.5rem 0;
     opacity: 0.5;
   }
@@ -315,7 +312,7 @@ article {
   }
 
   ol > li::marker {
-    color: var(--tac-green);
+    color: var(--tac-white);
     font-weight: 600;
   }
 
@@ -335,8 +332,8 @@ article {
 // ─────────────────────────────────────
 
 a.internal.tag-link {
-  background: rgba(0, 255, 65, 0.06) !important;
-  border: 1px solid rgba(0, 255, 65, 0.25);
+  background: rgba(230, 57, 70, 0.06) !important;
+  border: 1px solid rgba(230, 57, 70, 0.25);
   border-radius: 4px;
   padding: 0.15rem 0.6rem !important;
   font-size: 0.78rem;
@@ -377,7 +374,7 @@ a.internal.tag-link {
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tac-green);
+    color: var(--tac-white);
     font-weight: 700;
   }
 }
@@ -395,7 +392,7 @@ a.internal.tag-link {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-size: 0.82rem;
-    color: var(--tac-green);
+    color: var(--tac-white);
     font-weight: 700;
   }
 }
@@ -428,7 +425,7 @@ footer {
 
     &:hover {
       opacity: 1;
-      color: var(--tac-green);
+      color: var(--tac-red);
     }
   }
 }
@@ -442,7 +439,7 @@ footer {
     background: rgba(10, 14, 20, 0.85);
     border-radius: 4px;
     padding: 1.5rem;
-    border: 1px solid rgba(0, 255, 65, 0.06);
+    border: 1px solid rgba(230, 57, 70, 0.06);
     border-top: 1px solid rgba(230, 57, 70, 0.15);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(230, 57, 70, 0.1);
     position: relative;
@@ -470,7 +467,7 @@ footer {
       bottom: -1px;
       right: -1px;
       border-width: 0 2px 2px 0;
-      border-color: var(--tac-green);
+      border-color: var(--tac-red);
     }
   }
 }
@@ -541,7 +538,7 @@ a, button, input {
 
 // Selection
 ::selection {
-  background: rgba(0, 255, 65, 0.25);
+  background: rgba(230, 57, 70, 0.25);
   color: #fff;
 }
 
@@ -590,7 +587,7 @@ a, button, input {
     font-size: 6rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    background: linear-gradient(135deg, var(--tac-red), var(--tac-green));
+    background: linear-gradient(135deg, var(--tac-red), var(--tac-white));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -602,7 +599,7 @@ a, button, input {
     font-size: 1.8rem;
     border: none !important;
     margin-bottom: 0.75rem;
-    color: var(--tac-green);
+    color: var(--tac-white);
   }
 
   p {
@@ -645,7 +642,7 @@ a, button, input {
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tac-green);
+    color: var(--tac-white);
     font-weight: 700;
   }
 
