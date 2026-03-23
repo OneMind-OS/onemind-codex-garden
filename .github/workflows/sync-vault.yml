@@ -1,0 +1,58 @@
+name: Sync Vault to Student Repo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Quartz repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Checkout student repo
+        uses: actions/checkout@v4
+        with:
+          repository: OneMind-OS/onemind-codex-live
+          token: ${{ secrets.VAULT_SYNC_TOKEN }}
+          path: _student-repo
+          fetch-depth: 1
+
+      - name: Sync content to student repo
+        run: |
+          # Remove old content (except .git and README.md at root)
+          cd _student-repo
+          find . -maxdepth 1 -not -name '.git' -not -name '.' -not -name 'README.md' -not -name 'LICENSE' -exec rm -rf {} +
+
+          # Copy fresh content from Quartz
+          cd ..
+          cp -r content/* _student-repo/
+
+          # Rename index.md back to README.md for GitHub display
+          if [ -f _student-repo/index.md ]; then
+            mv _student-repo/index.md _student-repo/README.md
+          fi
+
+      - name: Push changes
+        run: |
+          cd _student-repo
+          git config user.name "OneMind Sync"
+          git config user.email "sync@onemindcodex.com"
+
+          # Check if there are changes
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No changes to sync"
+            exit 0
+          fi
+
+          git add -A
+          git commit -m "Sync vault content from live site"
+          git push
