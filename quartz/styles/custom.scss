@@ -1,21 +1,57 @@
 @use "./base.scss";
 
 // ═══════════════════════════════════════════════
-// OneMind Codex — TACTICAL DARK Theme v3
-// Zeus Red (#E63946) + Cyan (#00D9FF)
-// Clean, readable, tactical
+// OneMind Codex — TACTICAL COMMAND CENTER v4
+// Red (#E63946) + Black + White + Tactical Green (#00FF41)
+// Military HUD aesthetic
 // ═══════════════════════════════════════════════
 
 :root {
   --tac-red: #E63946;
   --tac-red-dim: #B82D3A;
   --tac-red-glow: #FF4D5A;
-  --tac-cyan: #00D9FF;
-  --tac-cyan-dim: #00A8CC;
-  --tac-cyan-glow: #33E0FF;
-  --tac-bg: #0a0e14;
-  --tac-surface: #151b24;
-  --tac-border: #1e2530;
+  --tac-green: #00FF41;
+  --tac-green-dim: #00CC33;
+  --tac-green-glow: #33FF66;
+  --tac-bg: #050608;
+  --tac-surface: #0a0e14;
+  --tac-border: #151b24;
+  --tac-white: #e8edf4;
+}
+
+// ─────────────────────────────────────
+// TACTICAL GRID — Command Center Background
+// ─────────────────────────────────────
+
+// Grid + vignette overlay (dark mode only)
+:root[saved-theme="dark"] body {
+  background-color: #050608;
+  background-image:
+    radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.4) 100%),
+    linear-gradient(rgba(0, 255, 65, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed, scroll, scroll;
+}
+
+// Subtle scanline overlay on content area
+:root[saved-theme="dark"] .center {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 255, 65, 0.005) 3px,
+    rgba(0, 255, 65, 0.005) 4px
+  );
+}
+
+// Sidebar accent borders
+:root[saved-theme="dark"] .left {
+  border-right: 1px solid var(--tac-border);
+}
+
+:root[saved-theme="dark"] .right {
+  border-left: 1px solid var(--tac-border);
 }
 
 // ─────────────────────────────────────
@@ -44,7 +80,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   font-size: 1rem;
-  background: linear-gradient(135deg, var(--tac-red), var(--tac-cyan));
+  background: linear-gradient(135deg, var(--tac-red), var(--tac-green));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -67,7 +103,7 @@ button.desktop-explorer h2 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 0.8rem;
-  color: var(--tac-cyan);
+  color: var(--tac-green);
 }
 
 // Explorer tree — better item spacing & interaction
@@ -81,8 +117,8 @@ button.desktop-explorer h2 {
     transition: background-color 0.12s ease, color 0.12s ease, padding-left 0.12s ease;
 
     &:hover {
-      background: rgba(0, 217, 255, 0.06);
-      color: var(--tac-cyan);
+      background: rgba(0, 255, 65, 0.06);
+      color: var(--tac-green);
       padding-left: 0.65rem;
     }
 
@@ -102,7 +138,7 @@ button.desktop-explorer h2 {
     transition: background-color 0.12s ease;
 
     &:hover {
-      background: rgba(0, 217, 255, 0.04);
+      background: rgba(0, 255, 65, 0.04);
     }
 
     div > a,
@@ -121,7 +157,7 @@ button.desktop-explorer h2 {
 // Folder hover color
 .folder-container div > a:hover,
 .folder-container div > button:hover span {
-  color: var(--tac-cyan) !important;
+  color: var(--tac-green) !important;
 }
 
 // Folder icon color
@@ -142,8 +178,8 @@ button#search-button {
 
   &:hover,
   &:focus {
-    border-color: var(--tac-cyan);
-    box-shadow: 0 0 10px rgba(0, 217, 255, 0.15);
+    border-color: var(--tac-green);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.15);
   }
 }
 
@@ -152,7 +188,7 @@ button#search-button {
 // ─────────────────────────────────────
 
 .graph > svg .node > circle {
-  stroke: var(--tac-cyan) !important;
+  stroke: var(--tac-green) !important;
 }
 
 .graph > svg .link {
@@ -195,7 +231,7 @@ article {
   h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: var(--tac-cyan);
+    color: var(--tac-green);
     margin-top: 2rem;
   }
 
@@ -237,12 +273,12 @@ article {
     font-size: 0.94rem;
 
     th {
-      background: rgba(0, 217, 255, 0.06);
+      background: rgba(0, 255, 65, 0.06);
       font-family: var(--headerFont);
       font-weight: 600;
       font-size: 0.88em;
       letter-spacing: 0.02em;
-      color: var(--tac-cyan);
+      color: var(--tac-green);
       border-bottom: 2px solid var(--tac-red);
     }
 
@@ -261,7 +297,7 @@ article {
   hr {
     border: none;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--tac-red), var(--tac-cyan), transparent);
+    background: linear-gradient(90deg, transparent, var(--tac-red), var(--tac-green), transparent);
     margin: 2.5rem 0;
     opacity: 0.5;
   }
@@ -279,7 +315,7 @@ article {
   }
 
   ol > li::marker {
-    color: var(--tac-cyan);
+    color: var(--tac-green);
     font-weight: 600;
   }
 
@@ -299,8 +335,8 @@ article {
 // ─────────────────────────────────────
 
 a.internal.tag-link {
-  background: rgba(0, 217, 255, 0.06) !important;
-  border: 1px solid rgba(0, 217, 255, 0.25);
+  background: rgba(0, 255, 65, 0.06) !important;
+  border: 1px solid rgba(0, 255, 65, 0.25);
   border-radius: 4px;
   padding: 0.15rem 0.6rem !important;
   font-size: 0.78rem;
@@ -341,7 +377,7 @@ a.internal.tag-link {
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tac-cyan);
+    color: var(--tac-green);
     font-weight: 700;
   }
 }
@@ -359,7 +395,7 @@ a.internal.tag-link {
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-size: 0.82rem;
-    color: var(--tac-cyan);
+    color: var(--tac-green);
     font-weight: 700;
   }
 }
@@ -392,7 +428,7 @@ footer {
 
     &:hover {
       opacity: 1;
-      color: var(--tac-cyan);
+      color: var(--tac-green);
     }
   }
 }
@@ -403,11 +439,39 @@ footer {
 
 :root[saved-theme="dark"] {
   .center > article {
-    background: rgba(21, 27, 36, 0.5);
-    border-radius: 6px;
+    background: rgba(10, 14, 20, 0.85);
+    border-radius: 4px;
     padding: 1.5rem;
-    border: 1px solid rgba(0, 217, 255, 0.05);
-    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 255, 65, 0.06);
+    border-top: 1px solid rgba(230, 57, 70, 0.15);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(230, 57, 70, 0.1);
+    position: relative;
+
+    // HUD corner brackets
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-style: solid;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: -1px;
+      left: -1px;
+      border-width: 2px 0 0 2px;
+      border-color: var(--tac-red);
+    }
+
+    &::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 2px 2px 0;
+      border-color: var(--tac-green);
+    }
   }
 }
 
@@ -477,7 +541,7 @@ a, button, input {
 
 // Selection
 ::selection {
-  background: rgba(0, 217, 255, 0.25);
+  background: rgba(0, 255, 65, 0.25);
   color: #fff;
 }
 
@@ -526,7 +590,7 @@ a, button, input {
     font-size: 6rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    background: linear-gradient(135deg, var(--tac-red), var(--tac-cyan));
+    background: linear-gradient(135deg, var(--tac-red), var(--tac-green));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -538,7 +602,7 @@ a, button, input {
     font-size: 1.8rem;
     border: none !important;
     margin-bottom: 0.75rem;
-    color: var(--tac-cyan);
+    color: var(--tac-green);
   }
 
   p {
@@ -581,7 +645,7 @@ a, button, input {
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    color: var(--tac-cyan);
+    color: var(--tac-green);
     font-weight: 700;
   }
 
