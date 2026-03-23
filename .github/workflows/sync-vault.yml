@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'content/**'
+      - 'codex/**'
 
 jobs:
   sync:
@@ -34,7 +34,7 @@ jobs:
 
           # Copy fresh content from Quartz
           cd ..
-          cp -r content/* _student-repo/
+          cp -r codex/* _student-repo/
 
           # Rename index.md back to README.md for GitHub display
           if [ -f _student-repo/index.md ]; then
