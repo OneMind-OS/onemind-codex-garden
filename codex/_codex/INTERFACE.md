@@ -44,11 +44,15 @@ Each quadrant contains **numbered domain folders**. Each domain folder has a `RE
 
 | Need | Where to go |
 |------|------------|
+| **Brand new? Start here** | [`QUICK-START.md`](../QUICK-START.md) — 30-minute guided setup |
 | Starting fresh | `00-24 UI/00 Framework (Doctrine)/README.md` |
 | Daily log | `_codex/templates/daily.md` → save to your HP or UI domain |
 | Capture something fast | Drop it in `00-24 UI/06 Inbox (Queue)/` |
+| Set a goal | `_codex/templates/goal.md` |
+| Track a task | `_codex/templates/task.md` |
 | Make a decision record | `_codex/templates/decision.md` |
 | Start a project | `_codex/templates/project.md` |
+| Track a metric | `_codex/templates/metric.md` |
 | Run a weekly review | `_codex/templates/review.md` |
 | Find a contact | `25-49 HP/32 Relationships/` |
 

@@ -57,17 +57,24 @@ Five steps. One compounding loop.
 
 **Everything starts as input.** A thought, a voice note, a screenshot, a meeting takeaway, a link, a PDF. Capture is the act of getting it *into the system* before it disappears.
 
+### The Key Insight
+
+Capture isn't about writing good notes. It's about **reducing friction to zero** so nothing falls through cracks. A bad capture you can find later beats a perfect note you never wrote.
+
 ### Sources
 
-- Quick text notes (phone, desktop, voice transcription)
-- Conversations (meeting notes, call summaries)
-- Web clips (articles, references, research)
-- Agent output (AI-generated reports, summaries, analysis)
-- External feeds (email digests, RSS, notifications)
+| Trigger | Capture Method | Where It Lands |
+|---------|---------------|----------------|
+| Thought in the shower | Voice memo on phone | Inbox |
+| Meeting takeaway | Quick text note | Relevant quadrant inbox |
+| Article worth saving | Web clip + 1-line summary | Inbox |
+| Agent produced a report | Auto-saved by agent | Domain folder directly |
+| Dream/idea at 2am | Bedside notepad → photo | Inbox |
+| Business opportunity | Voice note → transcription | GE inbox |
 
 ### Rules
 
-1. **Capture fast, organize later.** Don't stop to categorize in the moment. Get it in.
+1. **Capture fast, organize later.** Don't stop to categorize in the moment. Get it in. The Organize step handles routing.
 2. **Use the inbox.** If you don't know where it goes, it goes to `06 Inbox (Queue)/` in the relevant quadrant — or the top-level staging area if the quadrant is unclear.
 3. **Use templates.** Even quick captures should use the appropriate template from `_codex/templates/`. This ensures frontmatter is present from the start.
 4. **Frontmatter from birth.** Every document gets YAML frontmatter when created — at minimum: `title`, `type`, `status`, `created`, `tags`.
@@ -76,11 +83,34 @@ Five steps. One compounding loop.
 
 Every quadrant has a `06 Inbox (Queue)/` subdirectory for unsorted captures. During the Organize step (or the weekly review), items get routed to their proper domain folder.
 
+### How Capture Connects to Organize
+
+Your inboxes fill up during the week. During your weekly review (× step), you route them to proper domains. This creates a natural rhythm: **capture freely all week → organize during review**. You never stop mid-thought to file something.
+
 ---
 
 ## O — Organize
 
 **Structure is what makes the system navigable — for humans and AI.**
+
+### The Key Insight
+
+Organization is NOT filing. Filing is putting things away and forgetting them. Organizing is giving things an **address** — a quadrant, a domain, a type — so they can be FOUND and ACTED ON.
+
+| Item In Inbox | Routing Decision | Destination |
+|--------------|------------------|-------------|
+| "Research protein intake" | Health topic | HP / 27 Body |
+| "Call accountant about LLC" | Business legal | GE / 81 Strategy |
+| "Fix the kitchen sink" | Home maintenance | LE / 50 Home |
+| "New AI tool looks promising" | Tech / tools | UI / 02 Agents |
+| "Birthday party for Aria" | Family / children | LE / 52 Children |
+| "I want to run a marathon" | This is a GOAL, not a note | HP / 27 Body (as goal type) |
+
+### The Three Organizing Actions
+
+1. **Route** — move from inbox to the right domain folder
+2. **Type** — assign the entity type (is this a note? a goal? a task? a decision?)
+3. **Tag** — add frontmatter so AI can find it without reading it
 
 ### The Four Quadrants
 
@@ -96,6 +126,10 @@ Every quadrant has a `06 Inbox (Queue)/` subdirectory for unsorted captures. Dur
 Each quadrant has 25 numbered domains (e.g., `00 System Core`, `25 Identity`, `50 Home`, `75 Brand`). Domains are the primary organizational unit — more stable than projects, more granular than quadrants.
 
 **You don't start with 100 domains.** See [Progressive Activation](#progressive-activation) below — you start with 4 quadrants and activate domains as your life expands. The 100 slots are the ceiling, not the floor.
+
+### How Organize Connects to Direct
+
+Once something has an address and a type, the Direct step can evaluate it. You can't prioritize or assign things that are floating in an inbox without context. Organization makes direction possible — it turns "stuff" into "actionable items with coordinates."
 
 ### Entity Types
 
@@ -227,6 +261,16 @@ AI agents can:
 
 Agents execute against SOPs (Standard Operating Procedures) documented in the vault. An SOP defines the steps, tools, inputs, outputs, and quality criteria — so an agent knows exactly what "do this task" means.
 
+### The Three Execution Modes
+
+| Mode | What Happens | Human Involvement |
+|------|-------------|-------------------|
+| **Human-only** | You do the work. Log the result. | 100% — physical tasks, creative work, relationships |
+| **Agent-assisted** | Agent does the work, you review the output | 20% — review and approve |
+| **Fully automated** | System runs on schedule or trigger, results logged | 0% — until the next review cycle |
+
+Most beginners start with 100% human execution. As you write SOPs and configure agents, the ratio shifts. An established system might run 40-60% through agents.
+
 ### Skills & Tools
 
 **Skills** are portable capability definitions in `_codex/skills/`. Each skill describes what it does, what inputs it needs, and what it outputs. Skills are agent-agnostic — any AI can learn them.
@@ -244,6 +288,10 @@ SKILL: "Monitor soil moisture"
   INPUT: field zone ID
   OUTPUT: moisture readings + irrigation alert
 ```
+
+### How Execute Connects to ×
+
+Every execution produces OUTPUT — a completed task, a generated report, a metric reading, a decision outcome. That output feeds into the × step, where you evaluate: did it work? What can we learn? What should we change? Execute without × is just busywork. Execute WITH × is a learning machine.
 
 ---
 
@@ -290,19 +338,16 @@ Every quarter:
 
 `_codex/profiles/` contains structured review profiles — checklists and prompts for weekly, monthly, and quarterly reviews. These can be run by humans alone or co-piloted with an AI agent.
 
-### The Multiplication Effect
+### How × Connects Back to Capture
+
+Every review surfaces new inputs: gaps you didn't notice, priorities that shifted, SOPs that need updating, ideas triggered by reflection. These go back into Capture — completing the loop. The system is a flywheel:
 
 ```
-CYCLE 1: Capture a business idea → Organize → Direct to agent → Agent researches
-         → × Review: market exists, idea validated. Lesson: this agent prompt works.
-
-CYCLE 2: Same prompt reused (faster). Agent finds competitors. You refine the SOP.
-         → × Review: SOP v2 is 2x faster. Agent context now includes market data.
-
-CYCLE 3: SOP runs automatically on new ideas. Agent pre-scores opportunities.
-         → × Review: System now handles 80% of market validation without you.
-
-Each × makes the next C-O-D-E faster, smarter, and more autonomous.
+CYCLE 1:  Messy. You're learning the system. Everything feels manual.
+CYCLE 4:  Smoother. Templates and SOPs are working. Inboxes are smaller.
+CYCLE 12: Compounding. Agents handle 30-40% of execution. Reviews are faster.
+CYCLE 52: Multiplied. The system practically runs itself.
+          You direct. It executes. × tracks. The loop never stops.
 ```
 
 ---

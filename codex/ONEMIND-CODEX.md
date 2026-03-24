@@ -178,8 +178,8 @@ your-codex/
 
 1. **Fork this vault** — clone it, make it yours.
 2. **Open in Obsidian** — or any Markdown editor. Obsidian recommended for the best experience.
-3. **Read `_codex/INTERFACE.md`** — this is the navigation guide. Understand the structure before you start filling it.
-4. **Start capturing** — use templates from `_codex/templates/`. Don't overthink organization — capture first, organize second.
+3. **Read [`QUICK-START.md`](QUICK-START.md)** — the 30-minute onboarding guide. Four buckets, three templates, one weekly review.
+4. **Start capturing** — use templates from `_codex/templates/`. Start with goal, task, and note templates.
 5. **Start with 4 quadrants, not 100 domains** — don't try to activate all domains at once. Drop things into the right quadrant. Domains activate as your life expands. See CODEX-FRAMEWORK.md for the Progressive Activation guide.
 6. **Review weekly** — the × (multiply) step isn't optional. Use the review profile in `_codex/profiles/` to stay accountable. Each review cycle multiplies the system's value.
 
