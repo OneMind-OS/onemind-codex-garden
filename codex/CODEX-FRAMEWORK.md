@@ -613,74 +613,73 @@ WEEK 52:  70% of Organize and 50% of Execute run through agents/automation.
 
 ## Mobile Access
 
-**Your codex lives on your computer as files and folders. Here's how to access it on mobile without breaking Git.**
+**Your codex lives on your computer as files and folders. Here's how to access it on your iPhone without breaking Git.**
 
-### The Three Sync Options
+### Obsidian Sync vs. iCloud — Head to Head
 
-| Method | Cost | Best For | Pros | Cons |
-|--------|------|----------|------|------|
-| **iCloud** | Free | Mac + iPhone/iPad users | Zero setup, free, automatic | Apple-only, Apple holds encryption keys |
-| **Obsidian Sync** | $4/mo | Cross-platform, or if you want encryption | End-to-end encrypted, version history, conflict resolution | Costs money, another subscription |
-| **Google Drive / Syncthing** | Free | Android users | Free, cross-platform | Manual setup, no built-in conflict resolution |
+| | **Obsidian Sync** | **iCloud** |
+|---|---|---|
+| **Cost** | $4/month | Free |
+| **Setup** | Subscribe, enable on both devices | Move vault to iCloud folder |
+| **Sync speed** | Fast — optimized for Obsidian vaults | Can be slow/laggy with large vaults |
+| **Reliability** | Very reliable, purpose-built | Known to occasionally delay or miss syncs |
+| **Conflict handling** | Shows both versions, lets you choose | Silently overwrites (last write wins — you lose the other) |
+| **Encryption** | Zero-knowledge E2E (even Obsidian can't read your files) | Apple holds the encryption keys |
+| **Version history** | 12 months of per-file snapshots | None (Git handles this on desktop) |
+| **Vault size limit** | 10 GB per vault | Your iCloud storage limit (5 GB free) |
+| **Works with Git** | Yes — same vault folder | Yes — same vault folder |
 
-### Recommended: iCloud (Mac + iPhone Users)
+### Recommended: Obsidian Sync
 
-If your vault is already on your Mac and you have an iPhone, iCloud is the simplest path — free, zero-config, automatic.
-
-**How it works:**
-1. Your vault folder lives inside iCloud Drive on your Mac
-2. Obsidian Desktop opens it from the iCloud folder — you still use Git from terminal/VS Code
-3. Obsidian Mobile on your iPhone opens the same iCloud folder — changes sync automatically
-4. Git only runs on desktop — mobile never touches Git directly
-
-**This avoids merge conflicts** because iCloud handles file sync and Git handles version control separately.
+For a codex that's growing toward 40+ domains and is the foundation of your entire framework, **Obsidian Sync is worth the $4/month.** The conflict resolution alone saves headaches — if you accidentally edit the same note on Mac and iPhone, iCloud silently picks one version and you lose the other. Obsidian Sync shows you both and lets you merge.
 
 **Setup:**
-1. Open Obsidian Desktop → Settings → About → move vault to iCloud (or it may already be there)
+1. Open Obsidian Desktop → Settings → Core Plugins → enable Sync
+2. Subscribe to Obsidian Sync ($4/month)
+3. Choose your vault → enable Sync → set a password (this is your E2E encryption key)
+4. On your iPhone: open Obsidian Mobile → Settings → Sync → log in → select the vault
+5. Keep Git on desktop only — Obsidian Sync handles mobile, Git handles version control
+
+**What syncs:** All your markdown files, templates, and frontmatter. You can exclude large folders (like `node_modules` or `.git`) in Sync settings.
+
+### Fallback: iCloud (Free Option)
+
+If you don't want to pay, iCloud works but comes with tradeoffs:
+
+**Setup:**
+1. Open Obsidian Desktop → Settings → About → move vault to iCloud
    ```
    ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/your-codex/
    ```
 2. Open Obsidian Mobile on iPhone — it auto-discovers iCloud vaults
 3. Keep Git on desktop only — commit, push, pull from your Mac
 
-### Alternative: Obsidian Sync ($4/month)
-
-Choose Obsidian Sync over iCloud when:
-- You use **Android + Mac** (iCloud doesn't work on Android)
-- You want **end-to-end encryption** (iCloud is encrypted but Apple holds keys; Obsidian Sync uses zero-knowledge encryption)
-- You want **version history inside Obsidian** (though Git already gives you this)
-- You want **built-in conflict resolution** if you accidentally edit the same file on two devices
-
-**Setup:**
-1. Subscribe to Obsidian Sync in the app
-2. Enable Sync on desktop and mobile — it handles everything
-
-### Alternative: Android Users
-
-1. **Obsidian Sync ($4/mo)** — simplest, works everywhere
-2. **Syncthing (free)** — open-source sync between desktop and Android
-3. **Termux + Git** — power users who want Git directly on Android
+**iCloud caveats:**
+- Sync can be slow, especially with 50+ files changing
+- `.obsidian/` config files sometimes conflict — this can reset your settings on one device
+- No way to verify a file synced before you close the app
+- If both devices edit the same file, one version is silently lost
 
 ### The Key Rule: Git Stays on Desktop
 
-No matter which sync method you choose, **Git only runs on your computer**. Mobile is for reading and quick captures. Desktop is for commits, pushes, and version control.
+No matter which sync method you choose, **Git only runs on your Mac**. Mobile is for reading and quick captures. Desktop handles commits, pushes, and version control.
 
 ### Mobile Capture Rules
 
 1. **Mobile is for CAPTURE only** — write quick notes, tasks, ideas
-2. **Always capture to the inbox** — don't try to organize on mobile
-3. **Never edit the same file on mobile and desktop simultaneously**
+2. **Always capture to the inbox** — don't try to organize on your phone
+3. **Never edit the same file on iPhone and Mac simultaneously**
 4. **Process inbox on desktop** — routing, organizing, and directing happen at the computer
 
-### Quick-Capture Workflow (Mobile)
+### Quick-Capture Workflow (iPhone)
 
 ```
-Phone buzzes with an idea →
-  Open Obsidian Mobile →
+Idea hits while you're out →
+  Open Obsidian on iPhone →
     New note in inbox (use note or task template) →
       Write 2-3 sentences →
-        Close app →
-          Sort it Sunday at your computer
+        Close app (Sync handles the rest) →
+          Sort it Sunday at your Mac
 ```
 
 This keeps mobile friction near zero and Git conflicts at zero.
