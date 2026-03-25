@@ -613,76 +613,142 @@ WEEK 52:  70% of Organize and 50% of Execute run through agents/automation.
 
 ## Mobile Access
 
-**Your codex lives on your computer as files and folders. Here's how to access it on your iPhone without breaking Git.**
+**Your codex lives on your Mac as files and folders, synced to GitHub and your VPS. Here's how to add iPhone access without creating conflicts.**
 
-### Obsidian Sync vs. iCloud — Head to Head
+### Understanding the Sync Architecture
+
+Your codex has multiple sync layers. Before adding mobile, you need to understand what's already running:
+
+```
+┌───────────────┐         ┌──────────┐         ┌──────────────────┐
+│   YOUR MAC    │ ──git──▶│  GITHUB  │◀──pull──│    VPS           │
+│  (Obsidian)   │◀──git── │  (main)  │──push──▶│  (codex-watch)   │
+│               │         │          │         │  auto-commit ~3s  │
+│               │         │          │         │  auto-pull ~1min  │
+└───────────────┘         └──────────┘         └──────────────────┘
+       ↕                        │
+  Obsidian Sync                 ├──▶ Cloudflare Pages (website)
+       ↕                        └──▶ Student Template (auto-sync)
+┌───────────────┐
+│   iPHONE      │
+│  (Obsidian    │
+│   Mobile)     │
+└───────────────┘
+```
+
+**What's already happening:**
+- **Mac → GitHub**: You manually commit and push
+- **VPS → GitHub**: `codex-watch.service` auto-commits within ~3 seconds of any file change, auto-pushes
+- **GitHub → VPS**: `codex-pull.timer` pulls every 1 minute
+- **Legacy AI**: Writes to the vault on the VPS, changes auto-commit to GitHub
+
+**What Obsidian Sync adds:**
+- **Mac ↔ iPhone**: Obsidian Sync syncs vault files between your two devices
+- Obsidian Sync has **zero awareness of Git** — it just syncs files
+- When Sync delivers a file change from iPhone → Mac, Git sees it as a local file modification (same as if you edited it yourself)
+
+### Will This Create Conflicts?
+
+**Short answer: No — if you follow one rule.**
+
+Here's why it's safe:
+
+| Scenario | What Happens | Risk |
+|----------|-------------|------|
+| You create a NEW file on iPhone | Sync delivers it to Mac → you commit → GitHub → VPS pulls it | ✅ **Zero risk** — new files can't conflict |
+| You edit a file on iPhone that nobody else touched | Sync delivers edit to Mac → you commit → normal flow | ✅ **Zero risk** — no competing edits |
+| You edit a file on iPhone while Legacy AI edits the SAME file on VPS | Sync delivers your version to Mac. VPS pushes Legacy's version to GitHub. When you `git pull`, **merge conflict**. | ⚠️ **This is the only real risk** |
+
+**The one rule that prevents all conflicts:**
+
+> **On mobile, only CREATE new files (captures to inbox). Never EDIT existing files that agents might also touch.**
+
+This is safe because:
+1. New files created on iPhone don't exist anywhere else → no conflict possible
+2. Obsidian Sync delivers the new file to your Mac
+3. Next time you sit at your Mac, commit and push → GitHub → VPS gets it in 1 min
+4. Your auto-commit on VPS only touches files that agents write to — never your inbox
+
+### What About the Auto-Commit on VPS?
+
+The VPS `codex-watch.service` auto-commits agent changes within ~3 seconds and pushes to GitHub. This means GitHub may have new commits that your Mac doesn't have yet.
+
+**The flow when you edit on iPhone:**
+
+```
+1. You create a note on iPhone (10am, on the go)
+2. Obsidian Sync delivers it to Mac (~seconds)
+3. Meanwhile, Legacy AI writes a report on VPS (10:15am)
+4. VPS auto-commits and pushes to GitHub (10:15am)
+5. You sit at Mac (6pm), open terminal:
+   a. git pull → gets Legacy's changes from GitHub ✅
+   b. git add → stages your new iPhone capture ✅
+   c. git commit && git push → sends both to GitHub ✅
+   d. VPS picks up your capture within 1 min ✅
+```
+
+**No conflict** because your iPhone capture is a NEW file and Legacy's edit is a DIFFERENT file.
+
+### What Does NOT Sync to Git from iPhone
+
+**Obsidian Sync ≠ Git.** Editing on your iPhone does NOT automatically commit to Git or push to GitHub. The flow is:
+
+```
+iPhone edit → Obsidian Sync → Mac filesystem (local change only)
+                                    ↓
+                        You must manually: git add → commit → push
+                                    ↓
+                              Then GitHub and VPS get it
+```
+
+If you want iPhone captures to reach the VPS faster, you could add an auto-commit script on your Mac (like the VPS has). But for now, manual commit when you sit down at your Mac is fine.
+
+### Obsidian Sync Setup
+
+1. **Obsidian Desktop** → Settings → Core Plugins → enable **Sync**
+2. Subscribe to Obsidian Sync ($4/month Standard, or $8/month Plus for 10 GB + 12-month history)
+3. Choose your vault → enable Sync → set an encryption password
+4. **Critical: Exclude Git files** — in Sync settings, exclude:
+   - `.git/` (Git internals — never sync these)
+   - `node_modules/` (if present)
+   - `.obsidian/workspace.json` (device-specific layout)
+5. **On iPhone**: Open Obsidian Mobile → Settings → Sync → log in → select the vault
+6. Test: Create a note on iPhone, verify it appears on Mac within seconds
+
+### Obsidian Sync vs. iCloud — Why Sync Wins Here
 
 | | **Obsidian Sync** | **iCloud** |
 |---|---|---|
-| **Cost** | $4/month | Free |
-| **Setup** | Subscribe, enable on both devices | Move vault to iCloud folder |
-| **Sync speed** | Fast — optimized for Obsidian vaults | Can be slow/laggy with large vaults |
-| **Reliability** | Very reliable, purpose-built | Known to occasionally delay or miss syncs |
-| **Conflict handling** | Shows both versions, lets you choose | Silently overwrites (last write wins — you lose the other) |
-| **Encryption** | Zero-knowledge E2E (even Obsidian can't read your files) | Apple holds the encryption keys |
-| **Version history** | 12 months of per-file snapshots | None (Git handles this on desktop) |
-| **Vault size limit** | 10 GB per vault | Your iCloud storage limit (5 GB free) |
-| **Works with Git** | Yes — same vault folder | Yes — same vault folder |
+| **Conflict handling** | Shows both versions, lets you merge | Silently overwrites (last write wins) |
+| **Git coexistence** | Clean — excludes `.git/` folder, only syncs vault content | Can corrupt `.git/` metadata and cause repo issues |
+| **Encryption** | Zero-knowledge E2E | Apple holds keys |
+| **Selective sync** | Exclude folders, file types | All or nothing |
 
-### Recommended: Obsidian Sync
+**iCloud is risky with Git repos** because it may try to sync `.git/` internals, which corrupts the repository. Obsidian Sync lets you explicitly exclude `.git/` — making it the safe choice for a Git-tracked vault.
 
-For a codex that's growing toward 40+ domains and is the foundation of your entire framework, **Obsidian Sync is worth the $4/month.** The conflict resolution alone saves headaches — if you accidentally edit the same note on Mac and iPhone, iCloud silently picks one version and you lose the other. Obsidian Sync shows you both and lets you merge.
+### Mobile Capture Rules (Safety Rules)
 
-**Setup:**
-1. Open Obsidian Desktop → Settings → Core Plugins → enable Sync
-2. Subscribe to Obsidian Sync ($4/month)
-3. Choose your vault → enable Sync → set a password (this is your E2E encryption key)
-4. On your iPhone: open Obsidian Mobile → Settings → Sync → log in → select the vault
-5. Keep Git on desktop only — Obsidian Sync handles mobile, Git handles version control
+These aren't just convenience — they prevent conflicts with your VPS auto-sync:
 
-**What syncs:** All your markdown files, templates, and frontmatter. You can exclude large folders (like `node_modules` or `.git`) in Sync settings.
-
-### Fallback: iCloud (Free Option)
-
-If you don't want to pay, iCloud works but comes with tradeoffs:
-
-**Setup:**
-1. Open Obsidian Desktop → Settings → About → move vault to iCloud
-   ```
-   ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/your-codex/
-   ```
-2. Open Obsidian Mobile on iPhone — it auto-discovers iCloud vaults
-3. Keep Git on desktop only — commit, push, pull from your Mac
-
-**iCloud caveats:**
-- Sync can be slow, especially with 50+ files changing
-- `.obsidian/` config files sometimes conflict — this can reset your settings on one device
-- No way to verify a file synced before you close the app
-- If both devices edit the same file, one version is silently lost
-
-### The Key Rule: Git Stays on Desktop
-
-No matter which sync method you choose, **Git only runs on your Mac**. Mobile is for reading and quick captures. Desktop handles commits, pushes, and version control.
-
-### Mobile Capture Rules
-
-1. **Mobile is for CAPTURE only** — write quick notes, tasks, ideas
-2. **Always capture to the inbox** — don't try to organize on your phone
-3. **Never edit the same file on iPhone and Mac simultaneously**
-4. **Process inbox on desktop** — routing, organizing, and directing happen at the computer
+1. **CREATE new files only** — write new notes, tasks, ideas in the inbox
+2. **Never EDIT existing files on iPhone** — agents on VPS may be editing them too
+3. **Always capture to the inbox** (`06 Inbox (Queue)/`) — inboxes are human-only zones, agents don't touch them
+4. **Commit from Mac** — when you sit down, `git pull` first, then `git add/commit/push`
 
 ### Quick-Capture Workflow (iPhone)
 
 ```
 Idea hits while you're out →
   Open Obsidian on iPhone →
-    New note in inbox (use note or task template) →
+    New note in 06 Inbox (use note or task template) →
       Write 2-3 sentences →
-        Close app (Sync handles the rest) →
-          Sort it Sunday at your Mac
+        Close app →
+          Obsidian Sync delivers to Mac (seconds) →
+            Next time at Mac: git pull, commit, push →
+              VPS gets it within 1 min
 ```
 
-This keeps mobile friction near zero and Git conflicts at zero.
+This keeps mobile friction near zero, Git conflicts at zero, and your VPS auto-sync pipeline unbroken.
 
 ---
 
