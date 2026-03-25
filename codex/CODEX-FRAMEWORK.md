@@ -719,16 +719,75 @@ If you want iPhone captures to reach the VPS faster, you could add an auto-commi
 
 **Standard is enough for a codex vault.** Your vault is pure markdown — even with hundreds of files, you'll use well under 1 GB. The 5 MB file limit only affects attachments (images, PDFs), not markdown files. Upgrade to Plus only if you start embedding large media or want 12 months of version history inside Obsidian.
 
-**Setup steps:**
+#### Step 1 — Set Up Desktop (Mac) First
+
 1. **Obsidian Desktop** → Settings → Core Plugins → enable **Sync**
-2. Subscribe to Obsidian Sync Standard ($4-5/month)
-3. Choose your vault → enable Sync → set an encryption password (this is your E2E key — don't lose it)
-4. **Critical: Exclude Git files** — in Sync settings, exclude:
-   - `.git/` (Git internals — never sync these)
+2. **Settings → Sync** → sign in to your Obsidian account
+3. Click **"Create remote vault"** → name it (e.g. `OneMind-Codex`) → pick a region → set an encryption password (this is your E2E key — don't lose it)
+4. Wait for the initial upload to finish — watch the Sync log (Settings → Sync → "View sync log") for file counts ticking up
+5. **Exclude device-specific files** — in Sync settings, exclude:
    - `node_modules/` (if present)
    - `.obsidian/workspace.json` (device-specific layout)
-5. **On iPhone**: Open Obsidian Mobile → Settings → Sync → log in → select the vault
-6. Test: Create a note on iPhone, verify it appears on Mac within seconds
+
+> **Note on `.git/`:** Obsidian Sync **automatically excludes all dot-folders** (`.git/`, `.vscode/`, etc.) except `.obsidian/`. You do NOT need to manually exclude `.git/` — it's built-in behavior. Your Git repository is safe by default.
+
+#### Step 2 — Connect iPhone
+
+This is where most people get stuck. **You must open a remote vault, not create a new local one.**
+
+1. Open Obsidian on iPhone
+2. Tap the vault switcher (bottom-left) → **"Open remote vault"** ← this is the key step
+   - ❌ NOT "Create vault"
+   - ❌ NOT "Open folder as vault"
+   - ✅ **"Open remote vault"**
+3. Sign in with the **same Obsidian account** you used on Mac
+4. Your remote vault (e.g. `OneMind-Codex`) will appear in the list → tap it
+5. Choose a local name → storage location = **"On My iPhone"** (NOT iCloud Drive) → tap Create
+6. Wait for initial download — may take a few minutes depending on vault size
+
+#### Step 3 — Verify It's Working
+
+| Check | Where | What You See |
+|-------|-------|-------------|
+| **Sync status icon** | Bottom status bar on iPhone | Cloud icon — spinning = syncing, checkmark ✅ = synced |
+| **Sync log** | Settings → Sync → "View sync log" | Timestamps of recent uploads/downloads with file names |
+| **Manual test (iPhone → Mac)** | Create a test note on iPhone | Should appear on Mac within seconds |
+| **Reverse test (Mac → iPhone)** | Edit a note on Mac | Open iPhone — change appears after brief sync |
+
+**If you see "Synced" in the sync log with recent timestamps and the cloud icon shows a checkmark, you're connected.** ✅
+
+#### Troubleshooting — Common Issues
+
+| Problem | Fix |
+|---------|-----|
+| No remote vault showing on iPhone | Make sure you created the remote vault on Desktop first (Step 1, #3) |
+| Signed in but nothing syncs | Check you're on the **same Obsidian account** on both devices |
+| Vault exists but shows 0 files | Wait — initial sync can take a few minutes for larger vaults |
+| "Vault not found" error | Sign out of Sync on iPhone, force-quit the app, reopen, sign back in |
+| Changes not appearing | Check Wi-Fi/cellular connection, then check Sync log for errors |
+| Duplicate files appearing | Check conflict resolution in Settings → Sync — Obsidian saves both versions for you to merge |
+
+### Why NOT Add Sync or CLI to the VPS
+
+Your VPS is a **headless server**. Both Obsidian CLI and Obsidian Sync require a running Obsidian GUI application — they are "remote controls" for the desktop app, not standalone tools. They cannot run on a headless VPS.
+
+More importantly, adding Sync to VPS would create a **double-sync nightmare**:
+
+| | **Obsidian CLI** | **Obsidian Sync** | **Git (current VPS setup)** |
+|---|---|---|---|
+| **Requires GUI Obsidian?** | ✅ Yes | ✅ Yes | ❌ No — fully headless |
+| **Works on headless VPS?** | ❌ No | ❌ No | ✅ Yes |
+| **Conflict risk if added?** | N/A (can't run) | ⚠️ Double-sync: Git AND Sync both pushing changes = guaranteed conflicts | Already working cleanly |
+
+**The architecture stays cleanly separated — each layer does one job:**
+
+```
+Obsidian Sync  = Mac ↔ iPhone (file sync only, no Git awareness)
+Git            = Mac ↔ GitHub ↔ VPS (source of truth, version control)
+Obsidian CLI   = Mac only (safe vault operations where Obsidian Desktop runs)
+```
+
+No overlap. No double-sync. No conflicts.
 
 ### Why Obsidian Sync Over iCloud (Long-Term)
 
@@ -736,14 +795,14 @@ iCloud sync with Obsidian improved with iOS 18's "Keep Downloaded" feature, but 
 
 | | **Obsidian Sync** | **iCloud** |
 |---|---|---|
-| **Git coexistence** | Clean — excludes `.git/` folder, only syncs vault content | **Can corrupt `.git/` metadata** — iCloud doesn't understand Git internals |
+| **Git coexistence** | Safe — auto-excludes `.git/` and all dot-folders by default | **Can corrupt `.git/` metadata** — iCloud doesn't understand Git internals |
 | **Conflict handling** | Shows both versions, lets you merge | Silently overwrites (last write wins — you lose the other edit) |
 | **Large vault reliability** | Purpose-built for Obsidian vaults of any size | Gets flaky as vaults grow past hundreds of files |
 | **Encryption** | Zero-knowledge E2E (even Obsidian can't read your files) | Apple holds the keys |
 | **Selective sync** | Exclude folders and file types | All or nothing |
 | **Cost** | $4-5/month | Free |
 
-**The `.git/` risk is the dealbreaker.** Your codex is a Git repository synced to GitHub and your VPS. iCloud may try to sync `.git/` internals (index files, pack files, refs), which corrupts the repository. Obsidian Sync lets you explicitly exclude `.git/` — making it the only safe choice for a Git-tracked vault.
+**The `.git/` risk is the dealbreaker.** Your codex is a Git repository synced to GitHub and your VPS. iCloud may try to sync `.git/` internals (index files, pack files, refs), which corrupts the repository. Obsidian Sync auto-excludes `.git/` by design — making it the only safe choice for a Git-tracked vault.
 
 **For a system you're building your entire framework and product around, $5/month is the cost of one coffee to guarantee it doesn't break.**
 
