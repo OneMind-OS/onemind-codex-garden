@@ -73,7 +73,7 @@ Four quadrants covering your ENTIRE existence:
 - **HP (Holistic Performance):** Health, identity, finance, skills, relationships
 - **LE (Legacy Evolution):** Family, home, marriage, children, heritage, estate
 - **GE (Generational Entrepreneurship):** Business, ventures, revenue, strategy
-- **IO (Intelligent Operations):** The coordination layer — AI, infrastructure, automation
+- **SO (Sovereign Operations):** The coordination layer — AI, infrastructure, automation
 
 GTD is task-scope. PARA is file-scope. CODEX is life-scope.
 

@@ -2,7 +2,7 @@
 title: "Brand Glossary — What Everything Means"
 type: doctrine
 status: active
-domain: IO/00 Framework
+domain: SO/00 Framework
 created: 2026-03-26
 ai_summary: "Definitive glossary of every One Mind brand name, acronym, and product — what it is, what it isn't, and how they relate."
 ---
@@ -20,7 +20,7 @@ ONE MIND                          ← Philosophy / Brand
   └─ ONE MIND OS                  ← The complete operating system
        ├─ CODEX Method (C.O.D.E.×) ← The method you follow
        ├─ CODEX Vault              ← The file system you build
-       │    ├─ IO  (00–24)         ← Intelligent Operations (control plane)
+       │    ├─ SO  (00–24)         ← Sovereign Operations (control plane)
        │    ├─ HP  (25–49)         ← Holistic Performance (personal)
        │    ├─ HP  (50–74)         ← Legacy Evolution (family & legacy)
        │    └─ GE  (75–99)         ← Generational Entrepreneurship (business)
@@ -95,22 +95,22 @@ ONE MIND                          ← Philosophy / Brand
 
 ## The 4 Quadrants
 
-### IO — Intelligent Operations (Domains 00–24)
+### SO — Sovereign Operations (Domains 00–24)
 
 | | |
 |---|---|
 | **What it is** | The control plane. Where your AI agents, tools, infrastructure, and system operations live. |
-| **What it's NOT** | A life domain. IO doesn't hold your personal stuff — it holds the machinery that RUNS your personal stuff. |
-| **Think of it as** | The engine room of a ship. HP/LE/GE are the decks where people live. IO is where the engines, navigation, and communications systems run. |
+| **What it's NOT** | A life domain. SO doesn't hold your personal stuff — it holds the machinery that RUNS your personal stuff. |
+| **Think of it as** | The engine room of a ship. HP/LE/GE are the decks where people live. SO is where the engines, navigation, and communications systems run. |
 | **Key domains** | 00 Framework, 01 Command, 02 Agents, 03 Protocols, 06 Inbox, 08 Infrastructure, 09 Automation |
-| **Examples** | "My agent configs are in IO/02 Agents." / "The inbox lives in IO because processing it is a system operation." |
+| **Examples** | "My agent configs are in SO/02 Agents." / "The inbox lives in SO because processing it is a system operation." |
 
 ### HP — Holistic Performance (Domains 25–49)
 
 | | |
 |---|---|
 | **What it is** | Everything about YOU as an individual — health, mind, skills, money, identity, joy. |
-| **What it's NOT** | Family stuff (that's LE). Business stuff (that's GE). System stuff (that's IO). |
+| **What it's NOT** | Family stuff (that's LE). Business stuff (that's GE). System stuff (that's SO). |
 | **Think of it as** | Your personal operating manual. If it dies with you, it's HP. |
 | **Key domains** | 25 Identity, 26 Intelligence, 27 Body, 28 Mastery, 29 Life Systems, 30 Finance |
 | **Examples** | "My workout routine is in HP/27 Body." / "Personal budget goes in HP/30 Finance." |
@@ -148,13 +148,13 @@ ONE MIND                          ← Philosophy / Brand
 ### "Is this the same as OpenAI Codex?"
 **No.** OpenAI Codex is a coding agent for software engineers. One Mind Codex is a life operating system for everyone. Different audiences, different purpose, different product. Always say "One Mind Codex" or "The CODEX Method" to disambiguate.
 
-### "What's the difference between IO and the other quadrants?"
-**IO is the engine. HP/LE/GE are the vehicle.** IO is where your agents, tools, automations, and system infrastructure live. The other three quadrants are life domains — they hold the actual content of your life. IO runs them.
+### "What's the difference between SO and the other quadrants?"
+**SO is the engine. HP/LE/GE are the vehicle.** SO is where your agents, tools, automations, and system infrastructure live. The other three quadrants are life domains — they hold the actual content of your life. SO runs them.
 
 ### "Where does code go?"
 - **System code** (scripts, configs, deployments) → `_system/` folder (excluded from public template)
 - **Framework code** (skills, templates, conventions) → `_codex/` folder
-- **Domain documentation about tech** → IO domains (02 Agents, 08 Infrastructure, 10 Development)
+- **Domain documentation about tech** → SO domains (02 Agents, 08 Infrastructure, 10 Development)
 - **Business tech stack** → GE/79 Technology
 
 ### "What's _codex vs _system?"
@@ -198,7 +198,7 @@ One Mind          = The philosophy    ("You + AI = One Mind")
 One Mind OS       = The system        (philosophy + method + vault + tools)
 CODEX             = The method        (C.O.D.E.× = Capture, Organize, Direct, Execute, × Multiply)
 CODEX             = The vault         (your Markdown file system)
-IO                = Control plane     (agents, tools, infrastructure — domains 00-24)
+SO                = Control plane     (agents, tools, infrastructure — domains 00-24)
 HP                = Personal          (health, mind, skills, money — domains 25-49)
 LE                = Family & Legacy   (marriage, children, heritage — domains 50-74)
 GE                = Business          (ventures, brand, IP, strategy — domains 75-99)

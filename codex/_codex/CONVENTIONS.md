@@ -158,7 +158,7 @@ Tags use a `namespace/value` pattern:
 ```
 
 Examples:
-- `io-02-20260318143022` — IO quadrant, domain 02, timestamped
+- `so-02-20260318143022` — SO quadrant, domain 02, timestamped
 - `hp-29-20260318-morning-routine` — HP quadrant, domain 29, descriptive slug
 - `ge-75-brand-architecture` — GE quadrant, domain 75
 

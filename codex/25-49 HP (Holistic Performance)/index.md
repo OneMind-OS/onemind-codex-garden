@@ -27,7 +27,7 @@ Most productivity systems stop here. One Mind goes further — but without a sol
 
 ```text
 HP = The person (hardware + software + fuel)
-IO = The brain
+SO = The brain
 LE = The home
 GE = The mission
 ```
