@@ -199,4 +199,99 @@ These exist in the PRIVATE vault (`onemind-codex`) and may affect consistency:
 
 ---
 
-*Last updated: 2026-03-26. This file is the definitive context for any AI agent working on this repository.*
+## Product & Distribution Strategy (April 2026)
+
+### What One Mind Sells
+
+The teachable product is NOT the 100-domain architecture. It's the transformation the framework enables. Two core offerings:
+
+1. **The CODEX Method** (5 steps) — This is our GTD. Capture → Organize → Direct → Execute → × Multiply. Anyone learns it in 5 minutes. It's a loop. It compounds. It extends beyond CODE (Forte) because it doesn't stop at "Express" — it goes through Execute and multiplies.
+
+2. **The 3+1 Life Model** — This is our PARA. Three life domains (Self, Foundation, Endeavor) running on one operating layer. The pitch: *"Master yourself, nurture your foundation, pursue your endeavor — orchestrated by your sovereign operating layer."*
+
+**One-liner:** *"One Mind is how you and AI run your life together."*
+
+Everything else — the 100 domains, 8 entity types, agent architecture, intelligence scores — is **Zeus's implementation**. It's proof the framework scales to extreme depth. We show it; we don't teach it on day one.
+
+### Brand Hierarchy
+
+- **One Mind** = The philosophy/brand ("You + AI = One Mind")
+- **The CODEX Method** = The teachable 5-step loop (lives under One Mind)
+- **Your Codex** = What each person builds (their vault, their book of life)
+- **One Mind OS** = The complete system (philosophy + method + vault + tools + community)
+
+### The 5 Product Layers
+
+```
+LAYER 1: THE IDEA (free, everywhere)
+"You + AI = One Mind. Here's the 5-step loop."
+→ Blog posts, social, podcast appearances, codex-live site
+
+LAYER 2: THE METHOD (manifesto, $0-10)
+CODEX method + 3+1 model + first 30 days playbook
+→ Short ebook (50-80 pages)
+
+LAYER 3: THE STARTER (free, codex-template)
+Empty vault with structure, templates, example content
+→ GitHub repo, one-click Obsidian setup
+
+LAYER 4: THE COMMUNITY ($10-30/mo)
+Weekly calls, shared implementations, Zeus answers questions
+→ Circle or Discord
+
+LAYER 5: THE ARCHITECT (premium, $500+)
+Zeus sets up YOUR codex with YOUR domains, YOUR agents
+→ 1-on-1 or small cohort
+```
+
+**Zeus lives at Layer 5.** Teaches Layers 1-3. Monetizes Layers 2-4.
+
+### Go-to-Market Sequence
+
+| Step | What | Why | Timeline |
+|------|------|-----|----------|
+| **1** | Manifesto (short ebook, 50-80 pages) | Establishes authority, explains method | 2-4 weeks |
+| **2** | Polish template vault (codex-template) | "Try before you buy" | Already exists |
+| **3** | Community launch (Circle/Discord) | Recurring revenue, implementation support | Alongside book |
+| **4** | Course / Coaching | Premium tier, first 30 days walkthrough | After 50-100 members |
+| **5** | Full book (200+ pages, paperback) | Legitimacy, podcasts, bookstores | 6-12 months |
+
+### Competitive Position (April 2026)
+
+| Framework | Created | What It Does | AI Integration | Life Scope |
+|-----------|---------|-------------|----------------|------------|
+| **GTD** (David Allen) | 2001 | Task capture & clarification | None | Tasks only |
+| **PARA** (Tiago Forte) | 2017 | 4-folder information organization | None | Information only |
+| **BASB/CODE** (Forte) | 2022 | Knowledge management method | None | Knowledge only |
+| **Fabric** (Miessler) | 2024 | Open-source AI prompt patterns | CLI tool | Prompts only |
+| **Notion AI** | 2023 | Custom agents inside workspace | Platform-locked | Team productivity |
+| **One Mind** (Zeus) | 2025 | AI-native human enhancement framework | Native agent architecture | **Entire life** |
+
+The gap: **Nobody has a comprehensive, tool-agnostic, AI-native life framework.** BASB stops at knowledge. GTD stops at tasks. Fabric stops at prompts. Notion stops at their platform. One Mind occupies the uncontested space of "AI-native human enhancement across all life domains."
+
+### Why It's Timeless (5-10 Year Thesis)
+
+As AI agents become more capable, the need for One Mind **increases**:
+
+- Domain separation becomes critical (you don't want your fitness agent touching your finances)
+- Autonomy levels (L0-L3) become essential governance
+- Review cadences keep humans in the loop
+- Tool-agnostic architecture survives platform churn
+- Markdown-first means every future AI system can read your Codex natively
+
+GTD and PARA become **less** relevant as AI handles capture and organization automatically. One Mind becomes **more** relevant because it's the governance layer for that AI.
+
+### Complexity by Design
+
+The 100-domain architecture, agent system, and full enhancement stack are **complex by design for the architect** (Zeus). For everyone else, One Mind is simple:
+
+- **5 steps** (CODEX method)
+- **3+1 structure** (HP/LE/GE + SO)
+- **1 vault** (your Codex — plain markdown files)
+- **Your AI** (whatever agent you use)
+
+The depth exists for those who want it. The simplicity exists for those who need it.
+
+---
+
+*Last updated: 2026-04-05. This file is the definitive context for any AI agent working on this repository.*
